@@ -20,7 +20,7 @@ No installation required! Just open the `index.html` file in your browser.
 ### **🔧 Run Locally**  
 1. **Clone the repository**  
    ```sh
-   git clone https://github.com/your-username/Binary-Decimal-Converter.git
+   git clone https://github.com/Refloow/Binary-Decimal-Converter.git
 
   ## 🌐 Live Demo  
 *https://refloow.com/convert*  
