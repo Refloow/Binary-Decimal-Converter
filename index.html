@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Binary ↔ Decimal Converter</title>
+  <style>
+    /* Minimal dark-mode styling */
+    body {
+      margin: 0;
+      padding: 1rem;
+      background: #121212;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .converter {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 0.2rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 4px;
+      background: #222;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background: #333;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background: #444;
+    }
+
+    .output {
+      background: #1e1e1e;
+      margin-top: 0.3rem;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Binary ↔ Decimal Converter</h1>
+
+  <div class="converter">
+    <label for="decimalInput">Decimal Input</label>
+    <input type="text" id="decimalInput" placeholder="Enter decimal" />
+    <button onclick="convertDecimalToBinary()">Convert Decimal → Binary</button>
+    <input type="text" id="decimalToBinaryOutput" class="output" placeholder="Binary result" readonly />
+  </div>
+
+  <div class="converter">
+    <label for="binaryInput">Binary Input</label>
+    <input type="text" id="binaryInput" placeholder="Enter binary" />
+    <button onclick="convertBinaryToDecimal()">Convert Binary → Decimal</button>
+    <input type="text" id="binaryToDecimalOutput" class="output" placeholder="Decimal result" readonly />
+  </div>
+
+  <script>
+    function convertDecimalToBinary() {
+      const decimalInput = document.getElementById('decimalInput').value.trim();
+      const outputField = document.getElementById('decimalToBinaryOutput');
+
+      if (!decimalInput) {
+        outputField.value = '';
+        return;
+      }
+
+      // Split by '.' to handle multiple segments (like IP address segments)
+      const segments = decimalInput.split('.');
+      try {
+        const binarySegments = segments.map(seg => {
+          const num = parseInt(seg, 10);
+          if (isNaN(num) || num < 0 || num > 255) {
+            throw new Error('Invalid decimal segment');
+          }
+          // Convert to binary and left-pad to 8 bits
+          return num.toString(2).padStart(8, '0');
+        });
+        // Rejoin with '.'
+        outputField.value = binarySegments.join('.');
+      } catch (err) {
+        outputField.value = 'Invalid input';
+      }
+    }
+
+    function convertBinaryToDecimal() {
+      const binaryInput = document.getElementById('binaryInput').value.trim();
+      const outputField = document.getElementById('binaryToDecimalOutput');
+
+      if (!binaryInput) {
+        outputField.value = '';
+        return;
+      }
+
+      // Split by '.' for multiple segments
+      const segments = binaryInput.split('.');
+      try {
+        const decimalSegments = segments.map(seg => {
+          // parse binary (up to 8 bits if IP style)
+          if (seg.length > 8) {
+            throw new Error('Binary segment longer than 8 bits');
+          }
+          const num = parseInt(seg, 2);
+          if (isNaN(num) || num < 0 || num > 255) {
+            throw new Error('Invalid binary segment');
+          }
+          return num.toString();
+        });
+        outputField.value = decimalSegments.join('.');
+      } catch (err) {
+        outputField.value = 'Invalid input';
+      }
+    }
+  </script>
+</body>
+</html>
