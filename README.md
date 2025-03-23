@@ -12,6 +12,10 @@ A simple, dark-themed, mobile friendly scalable **Binary-to-Decimal** and **Deci
 ✔️ Mobile friendly and scalable
 ✔️ Lightweight & **fully client-side** (no server required) 
 
+# DISCORD Server:
+On the server anyone can feel free to ask questions, engage in the comunity and discover other free open source software i build
+**https://discord.gg/4enDY8yhuS**
+
 
 ## 💻 Installation & Usage  
 No installation required! Just open the `index.html` file in your browser.  
