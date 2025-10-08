@@ -42,4 +42,4 @@ Contributions are welcome! Feel free to:
 - Submit a **pull request** to improve functionality  
 
 ## ⭐ Support  
-If you like this project, consider giving it a **star ⭐** on GitHub!  
+If you like this project, consider giving it a **star ⭐** on GitHub! 
